@@ -37,15 +37,21 @@
     </svg>
   </button>
   <button class="control-btn" id="fit" aria-label="Ajustar à janela" title="Ajustar à janela">
-    <!-- ...svg... -->
+    <!-- Ícone de fit to window (quatro setas para dentro) -->
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+      <polyline points="9 15 4 15 4 20"></polyline>
+      <polyline points="15 9 20 9 20 4"></polyline>
+      <polyline points="15 20 20 20 20 15"></polyline>
+      <polyline points="9 4 4 4 4 9"></polyline>
     </svg>
   </button>
   <button class="control-btn" id="fullscreen" aria-label="Tela cheia" title="Tela cheia">
-    <!-- ...svg... -->
+    <!-- Ícone de tela cheia novo (quatro setas para fora) -->
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+      <polyline points="4 9 4 4 9 4"></polyline>
+      <polyline points="20 15 20 20 15 20"></polyline>
+      <polyline points="15 4 20 4 20 9"></polyline>
+      <polyline points="9 20 4 20 4 15"></polyline>
     </svg>
   </button>
 </div>
@@ -1289,7 +1295,7 @@
   );
 
   // Função para centralizar e dar zoom no nó raiz
-  function centerRootNode(zoomLevel = 1.5) {
+  function centerRootNode(zoomLevel = 1.6) {
     // Aguarda renderização
     setTimeout(() => {
       const svg = document.getElementById('mindmap');
@@ -1320,12 +1326,12 @@
 
   // Aplica zoom e centralização inicial
   window.addEventListener('DOMContentLoaded', () => {
-    centerRootNode(isMobile() ? 1.1 : 1.5);
+    centerRootNode(isMobile() ? 1.2 : 1.6);
   });
 
   // Reaplica centralização ao redimensionar
   window.addEventListener('resize', () => {
-    centerRootNode(isMobile() ? 1.1 : 1.5);
+    centerRootNode(isMobile() ? 1.2 : 1.6);
   });
 
   // Funções de controle
