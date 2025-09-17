@@ -1,0 +1,1356 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Mapa Mental Estratégico - OPER365</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/style.css">
+</head>
+<body>
+<div class="header">
+  <div class="logo-container">
+    <!-- Use o src da imagem da logo+slogan conforme seu print -->
+    <img src="logo_oper.png" alt="OPER365 Logo e Slogan" class="logo logo-full">
+  </div>
+</div>
+
+<svg id="mindmap"></svg>
+
+<div class="controls">
+  <button class="control-btn" id="zoom-in" aria-label="Aumentar zoom" title="Aumentar zoom">
+    <!-- ...svg... -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      <line x1="11" y1="8" x2="11" y2="14"></line>
+      <line x1="8" y1="11" x2="14" y2="11"></line>
+    </svg>
+  </button>
+  <button class="control-btn" id="zoom-out" aria-label="Diminuir zoom" title="Diminuir zoom">
+    <!-- ...svg... -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      <line x1="8" y1="11" x2="14" y2="11"></line>
+    </svg>
+  </button>
+  <button class="control-btn" id="fit" aria-label="Ajustar à janela" title="Ajustar à janela">
+    <!-- ...svg... -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+    </svg>
+  </button>
+  <button class="control-btn" id="fullscreen" aria-label="Tela cheia" title="Tela cheia">
+    <!-- ...svg... -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+    </svg>
+  </button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-view@0.18.12/dist/browser/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/index.js"></script>
+<script>
+(() => {
+  // Dados do mapa mental
+  const mindmapData = {
+    "content": "OPER365: Estratégia Digital",
+    "children": [
+      {
+        "content": "🔄 MUDANÇA DE PARADIGMA: EIXO CENTRAL DA ESTRATÉGIA",
+        "children": [
+          {
+            "content": "<strong>Revolução no Comportamento de Busca</strong>",
+            "children": [
+              {
+                "content": "<strong>Google → IAs</strong>: ChatGPT, Gemini, Perplexity como novas portas de entrada",
+                "children": []
+              },
+              {
+                "content": "<strong>Busca Tradicional → Indexação Semântica</strong>: Conteúdo estruturado para compreensão de máquinas",
+                "children": []
+              },
+              {
+                "content": "<strong>SEO Clássico → SEO IA-Ready</strong>: Otimização para ser fonte primária de IAs",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Por que essa Mudança é Crítica?</strong>",
+            "children": [
+              {
+                "content": "70% dos usuários já utilizam IAs para pesquisa (dados de tendência)",
+                "children": []
+              },
+              {
+                "content": "IAs priorizam fontes estruturadas e verificáveis",
+                "children": []
+              },
+              {
+                "content": "Posicionamento como autoridade técnica gera credibilidade e leads qualificados",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "content": "🚀 DIFERENCIAIS ESTRATÉGICOS: NOSSA VANTAGEM COMPETITIVA",
+        "children": [
+          {
+            "content": "<strong>Único no Mercado com SEO IA-Ready</strong>",
+            "children": [
+              {
+                "content": "Concorrentes focados em SEO tradicional",
+                "children": []
+              },
+              {
+                "content": "Nós: Conteúdo estruturado para indexação por IAs",
+                "children": []
+              },
+              {
+                "content": "Resultado: Seremos citados como fonte em respostas técnicas",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Arquitetura de Autoridade Técnica</strong>",
+            "children": [
+              {
+                "content": "<strong>Schema Markup e JSON-LD em todo conteúdo</strong>",
+                "children": [
+                  {
+                    "content": "<strong>Explicação:</strong> Estrutura de dados que facilita a compreensão das informações por buscadores e IAs",
+                    "children": []
+                  },
+                  {
+                    "content": "<strong>Resultado:</strong> Aumenta a chance de sermos citados diretamente como fonte em respostas de inteligência artificial",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "content": "<strong>FAQs técnicas estruturadas</strong>",
+                "children": [
+                  {
+                    "content": "<strong>Explicação:</strong> Perguntas e respostas criadas em formato direto, padronizado e sem ambiguidades",
+                    "children": []
+                  },
+                  {
+                    "content": "<strong>Resultado:</strong> Facilita que IAs (ChatGPT, Gemini, Perplexity) escolham a OPER365 como resposta preferencial",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "content": "<strong>Tutoriais passo a passo validados</strong>",
+                "children": [
+                  {
+                    "content": "<strong>Explicação:</strong> Guias práticos e auditáveis, que ensinam processos de forma clara e replicável",
+                    "children": []
+                  },
+                  {
+                    "content": "<strong>Resultado:</strong> O site deixa de ser apenas vitrine e se torna um <strong>consultor digital 24/7</strong> para o mercado",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "content": "<strong>Cases com dados verificáveis</strong>",
+                "children": [
+                  {
+                    "content": "<strong>Explicação:</strong> Estudos de caso com métricas reais, comparativos e provas concretas de resultados",
+                    "children": []
+                  },
+                  {
+                    "content": "<strong>Resultado:</strong> Fortalece a credibilidade e funciona como argumento direto para vendas consultivas e imprensa",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "content": "<strong>Plataforma de Crescimento, não Apenas Vitrine</strong>",
+            "children": [
+              {
+                "content": "Site atual: apresentação básica",
+                "children": []
+              },
+              {
+                "content": "Novo site: máquina de geração de autoridade e leads",
+                "children": []
+              },
+              {
+                "content": "Transformação de visitantes em oportunidades qualificadas",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "content": "💎 IMPACTO ESTRATÉGICO PARA VENDAS CONSULTIVAS",
+        "children": [
+          {
+            "content": "<strong>Geração de Autoridade Pré-Venda</strong>",
+            "children": [
+              {
+                "content": "IAs nos apresentam como solução antes mesmo do contato",
+                "children": []
+              },
+              {
+                "content": "Redução de barreiras iniciais: já somos reconhecidos como referência",
+                "children": []
+              },
+              {
+                "content": "Aumento de qualidade dos leads: chegam com confiança na nossa expertise",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Aceleração do Ciclo de Vendas</strong>",
+            "children": [
+              {
+                "content": "Jornada de compra reduzida: clientes já educados por nosso conteúdo",
+                "children": []
+              },
+              {
+                "content": "Vendedores iniciam conversas em estágio avançado",
+                "children": []
+              },
+              {
+                "content": "Foco em solução específica, não em educação básica",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Escalabilidade de Aquisição</strong>",
+            "children": [
+              {
+                "content": "Fonte contínua de leads qualificados (9/mês após 3º mês)",
+                "children": []
+              },
+              {
+                "content": "Custo de aquisição reduzido com otimização para IAs",
+                "children": []
+              },
+              {
+                "content": "ROI positivo em 8 meses com crescimento exponencial subsequente",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "content": "🎯 VISÃO ESTRATÉGICA: ALINHAMENTO COM OBJETIVOS DE NEGÓCIO",
+        "children": [
+          {
+            "content": "<strong>Liderança de Mercado até 2030</strong>",
+            "children": [
+              {
+                "content": "Posicionamento como referência técnica em gestão operacional",
+                "children": []
+              },
+              {
+                "content": "Reconhecimento não apenas por clientes, mas por IAs como autoridade",
+                "children": []
+              },
+              {
+                "content": "Expansão baseada em credibilidade e resultados comprovados",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Propósito: Democratizar Tecnologia de Gestão</strong>",
+            "children": [
+              {
+                "content": "Site como ferramenta de educação e capacitação do mercado",
+                "children": []
+              },
+              {
+                "content": "Conteúdo que demonstra valor real e tangível",
+                "children": []
+              },
+              {
+                "content": "Alinhamento com valores: Compliance e Eficiência como vantagem competitiva",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Resultados Mensuráveis</strong>",
+            "children": [
+              {
+                "content": "100+ páginas indexadas por IAs",
+                "children": []
+              },
+              {
+                "content": "50+ citações em respostas técnicas",
+                "children": []
+              },
+              {
+                "content": "30% tráfego de fontes de IA",
+                "children": []
+              },
+              {
+                "content": "Primeira venda no 4º mês, com crescimento consistente",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "content": "🏆 ESTRUTURA ESTRATÉGICA DO SITE",
+        "children": [
+          {
+            "content": "<strong>Manifesto como Ponto de Partida</strong>",
+            "children": [
+              {
+                "content": "Comunicação clara da Mudança de Paradigma",
+                "children": []
+              },
+              {
+                "content": "Posicionamento não como \"mais um site\", mas como autoridade técnica",
+                "children": []
+              },
+              {
+                "content": "Alinhamento total com a UVP: \"Compliance e eficiência, sua vantagem competitiva\"",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Arquitetura de Conteúdo para Vendas Consultivas</strong>",
+            "children": [
+              {
+                "content": "Seções estratégicas que respondem a cada etapa da jornada de compra",
+                "children": []
+              },
+              {
+                "content": "Mensagens direcionadas para cada persona (decisores, gestores, técnicos)",
+                "children": []
+              },
+              {
+                "content": "Provas técnicas que sustentam conversões",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Validação Contínua</strong>",
+            "children": [
+              {
+                "content": "Modal de feedback direto com CEOs",
+                "children": []
+              },
+              {
+                "content": "Ajustes ágeis baseados em métricas e resultados",
+                "children": []
+              },
+              {
+                "content": "Evolução constante alinhada a mudanças no mercado",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "content": "👥 PÚBLICO-ALVO E PERSONAS",
+        "children": [
+          {
+            "content": "<strong>Mercados Atendidos</strong>",
+            "children": [
+              {
+                "content": "<strong>Hotelaria</strong>: Hotéis, motéis e resorts",
+                "children": []
+              },
+              {
+                "content": "<strong>Shopping Centers</strong>: Gestão predial eficiente",
+                "children": []
+              },
+              {
+                "content": "<strong>Condomínios</strong>: Manutenção preventiva",
+                "children": []
+              },
+              {
+                "content": "<strong>Empresas de AC</strong>: Soluções autônomas para PMOC",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Personas Principais</strong>",
+            "children": [
+              {
+                "content": "<strong>Donos/Decisores</strong> (Economic Buyers)",
+                "children": [
+                  {
+                    "content": "Foco: ROI, impacto estratégico, redução de custos",
+                    "children": []
+                  },
+                  {
+                    "content": "Necessidade: Resultados financeiros e vantagem competitiva",
+                    "children": []
+                  },
+                  {
+                    "content": "Dor: Perda de controle operacional e multas por não conformidade",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "content": "<strong>Gestores de Manutenção</strong> (Functional Buyers)",
+                "children": [
+                  {
+                    "content": "Foco: Agilidade, controle de processos, histórico auditável",
+                    "children": []
+                  },
+                  {
+                    "content": "Necessidade: Abertura rápida de OS, visibilidade operacional",
+                    "children": []
+                  },
+                  {
+                    "content": "Dor: Processos manuais, falta de padronização",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "content": "<strong>Governantas/QA</strong> (Gatekeepers)",
+                "children": [
+                  {
+                    "content": "Foco: Padronização, qualidade, facilidade de uso",
+                    "children": []
+                  },
+                  {
+                    "content": "Necessidade: Checklists, relatórios automáticos, auditoria",
+                    "children": []
+                  },
+                  {
+                    "content": "Dor: Baixa adoção da equipe, dificuldade de implementação",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "content": "<strong>Imprensa/Setor</strong> (Validators)",
+                "children": [
+                  {
+                    "content": "Foco: Inovação, cases de sucesso, dados concretos",
+                    "children": []
+                  },
+                  {
+                    "content": "Necessidade: Informações relevantes, tendências",
+                    "children": []
+                  },
+                  {
+                    "content": "Dor: Falta de conteúdo especializado",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "content": "💬 MESSAGING MATRIX",
+        "children": [
+          {
+            "content": "<strong>Mensagem Principal</strong>",
+            "children": [
+              {
+                "content": "<strong>UVP</strong>: \"Compliance e eficiência, sua vantagem competitiva\"",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Mensagens por Persona</strong>",
+            "children": [
+              {
+                "content": "<table>\n<thead>\n<tr>\n<th>Persona</th>\n<th>Headline</th>\n<th>Prova/Benefício</th>\n<th>CTA</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Donos/Decisores</td>\n<td>\"Compliance e eficiência, sua vantagem competitiva\"</td>\n<td>Redução de não conformidades com histórico auditável</td>\n<td>\"Calcular meu ROI\"</td>\n</tr>\n<tr>\n<td>Gestores de Manutenção</td>\n<td>\"Compliance e eficiência, sua vantagem competitiva\"</td>\n<td>Abertura de OS em 30s com adoção total</td>\n<td>\"Ver fluxo em 60s\"</td>\n</tr>\n<tr>\n<td>Governantas/QA</td>\n<td>\"Compliance e eficiência, sua vantagem competitiva\"</td>\n<td>Do bastidor ao check-out, eficiência que o hóspede sente</td>\n<td>\"Ver modelos de checklist\"</td>\n</tr>\n<tr>\n<td>Imprensa/Setor</td>\n<td>\"Compliance e eficiência, sua vantagem competitiva\"</td>\n<td>Casos e validações setoriais com impacto real</td>\n<td>\"Pedir press kit\"</td>\n</tr>\n</tbody>\n</table>",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "content": "🌱 NUTRIÇÃO DE LEADS",
+        "children": [
+          {
+            "content": "<strong>Jornada do Cliente</strong>",
+            "children": [
+              {
+                "content": "<strong>Consciência</strong>: Conteúdo educativo sobre compliance e eficiência",
+                "children": []
+              },
+              {
+                "content": "<strong>Consideração</strong>: Demonstração técnica e casos de sucesso",
+                "children": []
+              },
+              {
+                "content": "<strong>Decisão</strong>: Provas sociais e ROI detalhado",
+                "children": []
+              },
+              {
+                "content": "<strong>Ação</strong>: Demonstração personalizada e proposta comercial",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Estratégia de Nutrição</strong>",
+            "children": [
+              {
+                "content": "<strong>E-mail Marketing</strong>: Série educativa de 7 dias",
+                "children": []
+              },
+              {
+                "content": "<strong>Remarketing</strong>: Conteúdo específico por interesse",
+                "children": []
+              },
+              {
+                "content": "<strong>Webinars</strong>: Demonstração técnica e casos reais",
+                "children": []
+              },
+              {
+                "content": "<strong>Materiais ricos</strong>: E-books técnicos e checklists",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Pontos de Conversão</strong>",
+            "children": [
+              {
+                "content": "Landing pages otimizadas por persona",
+                "children": []
+              },
+              {
+                "content": "Formulários inteligentes com qualificação",
+                "children": []
+              },
+              {
+                "content": "Chatbots para atendimento imediato",
+                "children": []
+              },
+              {
+                "content": "Agendamento de demonstrações técnicas",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "content": "🗺️ MAPA DO SITE",
+        "children": [
+          {
+            "content": "<strong>Estrutura Principal</strong>",
+            "children": [
+              {
+                "content": "<strong>Home</strong>: Manifesto e posicionamento estratégico",
+                "children": []
+              },
+              {
+                "content": "<strong>Abertura</strong>: Mudança de Paradigma e diferenciais",
+                "children": []
+              },
+              {
+                "content": "<strong>Visão Geral</strong>: Missão, visão, valores e propósito",
+                "children": []
+              },
+              {
+                "content": "<strong>Objetivos</strong>: Metas e resultados esperados",
+                "children": []
+              },
+              {
+                "content": "<strong>Estratégia IA</strong>: Foco em SEO IA-Ready",
+                "children": []
+              },
+              {
+                "content": "<strong>IA-Ready</strong>: Detalhamento técnico da indexação semântica",
+                "children": []
+              },
+              {
+                "content": "<strong>Público-Alvo</strong>: Mercados e personas",
+                "children": []
+              },
+              {
+                "content": "<strong>Leads</strong>: Captura e qualificação",
+                "children": []
+              },
+              {
+                "content": "<strong>Mapa Site</strong>: Navegação completa",
+                "children": []
+              },
+              {
+                "content": "<strong>Pautas</strong>: Conteúdo programático",
+                "children": []
+              },
+              {
+                "content": "<strong>Performance</strong>: Métricas e resultados",
+                "children": []
+              },
+              {
+                "content": "<strong>Cronograma</strong>: Etapas de implementação",
+                "children": []
+              },
+              {
+                "content": "<strong>Riscos</strong>: Análise e mitigação",
+                "children": []
+              },
+              {
+                "content": "<strong>Roadmap</strong>: Visão futura",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Navegação Secundária</strong>",
+            "children": [
+              {
+                "content": "Blog com artigos técnicos",
+                "children": []
+              },
+              {
+                "content": "Biblioteca de recursos",
+                "children": []
+              },
+              {
+                "content": "Cases de sucesso",
+                "children": []
+              },
+              {
+                "content": "Sobre a empresa",
+                "children": []
+              },
+              {
+                "content": "Contato",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "content": "📝 PAUTAS DE CONTEÚDO",
+        "children": [
+          {
+            "content": "<strong>Eixos Temáticos Principais</strong>",
+            "children": [
+              {
+                "content": "<strong>Compliance e Regulamentação</strong>",
+                "children": [
+                  {
+                    "content": "Normativas técnicas e atualizações",
+                    "children": []
+                  },
+                  {
+                    "content": "Gestão de não conformidades",
+                    "children": []
+                  },
+                  {
+                    "content": "Histórico auditável como vantagem",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "content": "<strong>Eficiência Operacional</strong>",
+                "children": [
+                  {
+                    "content": "Redução de tempo em processos",
+                    "children": []
+                  },
+                  {
+                    "content": "Otimização de recursos",
+                    "children": []
+                  },
+                  {
+                    "content": "Impacto na experiência do cliente",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "content": "<strong>Tecnologia e Inovação</strong>",
+                "children": [
+                  {
+                    "content": "API-First e integrações",
+                    "children": []
+                  },
+                  {
+                    "content": "Arquitetura de microserviços",
+                    "children": []
+                  },
+                  {
+                    "content": "Preparação para o futuro tecnológico",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "content": "<strong>Casos e Resultados</strong>",
+                "children": [
+                  {
+                    "content": "Implementações bem-sucedidas",
+                    "children": []
+                  },
+                  {
+                    "content": "Métricas de antes e depois",
+                    "children": []
+                  },
+                  {
+                    "content": "Testemunhos de clientes",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "content": "<strong>Pautas de Vídeo</strong>",
+            "children": [
+              {
+                "content": "<strong>Série \"Compliance em Ação\"</strong> (5 episódios)",
+                "children": [
+                  {
+                    "content": "Ep. 1: O custo da não conformidade",
+                    "children": []
+                  },
+                  {
+                    "content": "Ep. 2: Como transformar obrigações em vantagens",
+                    "children": []
+                  },
+                  {
+                    "content": "Ep. 3: Histórico auditável: seu seguro operacional",
+                    "children": []
+                  },
+                  {
+                    "content": "Ep. 4: Do papel ao digital: evolução do compliance",
+                    "children": []
+                  },
+                  {
+                    "content": "Ep. 5: Compliance como vantagem competitiva",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "content": "<strong>Série \"Eficiência na Prática\"</strong> (4 episódios)",
+                "children": [
+                  {
+                    "content": "Ep. 1: OS em 30 segundos: como é possível",
+                    "children": []
+                  },
+                  {
+                    "content": "Ep. 2: Redução de custos com automação",
+                    "children": []
+                  },
+                  {
+                    "content": "Ep. 3: Impacto direto na experiência do cliente",
+                    "children": []
+                  },
+                  {
+                    "content": "Ep. 4: Medindo resultados em tempo real",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "content": "<strong>Tutoriais Técnicos</strong> (8 vídeos)",
+                "children": [
+                  {
+                    "content": "Implementação de checklists",
+                    "children": []
+                  },
+                  {
+                    "content": "Configuração de alertas automáticos",
+                    "children": []
+                  },
+                  {
+                    "content": "Integração com sistemas existentes",
+                    "children": []
+                  },
+                  {
+                    "content": "Análise de dados e dashboards",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "content": "<strong>Formatos de Conteúdo</strong>",
+            "children": [
+              {
+                "content": "<strong>Artigos Técnicos</strong>: SEO IA-Ready com schema markup",
+                "children": []
+              },
+              {
+                "content": "<strong>FAQs Estruturadas</strong>: 87 perguntas técnicas",
+                "children": []
+              },
+              {
+                "content": "<strong>Infográficos</strong>: Visualização de dados e processos",
+                "children": []
+              },
+              {
+                "content": "<strong>E-books</strong>: Guias aprofundados por tema",
+                "children": []
+              },
+              {
+                "content": "<strong>Checklists</strong>: Ferramentas práticas para implementação",
+                "children": []
+              },
+              {
+                "content": "<strong>Webinars</strong>: Demonstração ao vivo e Q&A",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "content": "📢 ESTRATÉGIA DE DISTRIBUIÇÃO E PROMOÇÃO",
+        "children": [
+          {
+            "content": "<strong>Canais Primários</strong>",
+            "children": [
+              {
+                "content": "<strong>Busca Orgânica</strong>: Otimização para IAs e Google",
+                "children": []
+              },
+              {
+                "content": "<strong>Mídias Sociais</strong>: LinkedIn e Twitter (B2B)",
+                "children": []
+              },
+              {
+                "content": "<strong>E-mail Marketing</strong>: Nutrição de leads",
+                "children": []
+              },
+              {
+                "content": "<strong>Parcerias</strong>: Associações setoriais e influenciadores",
+                "children": []
+              },
+              {
+                "content": "<strong>PR</strong>: Imprensa especializada e eventos",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Estratégia de Promoção</strong>",
+            "children": [
+              {
+                "content": "<strong>Lançamento Faseado</strong>:",
+                "children": [
+                  {
+                    "content": "Fase 1: Teaser e prévia para leads existentes",
+                    "children": []
+                  },
+                  {
+                    "content": "Fase 2: Lançamento oficial com manifesto",
+                    "children": []
+                  },
+                  {
+                    "content": "Fase 3: Expansão com casos e resultados",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "content": "<strong>Amplificação</strong>:",
+                "children": [
+                  {
+                    "content": "Campanhas no LinkedIn direcionadas a cada persona",
+                    "children": []
+                  },
+                  {
+                    "content": "Webinars exclusivos para segmentos específicos",
+                    "children": []
+                  },
+                  {
+                    "content": "Parcerias com associações de hotelaria e shopping centers",
+                    "children": []
+                  },
+                  {
+                    "content": "Conteúdo patrocinado em publicações setoriais",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "content": "<strong>Métricas de Distribuição</strong>",
+            "children": [
+              {
+                "content": "Alcance e engajamento por canal",
+                "children": []
+              },
+              {
+                "content": "Taxa de compartilhamento de conteúdo",
+                "children": []
+              },
+              {
+                "content": "Tráfego de referência",
+                "children": []
+              },
+              {
+                "content": "Geração de leads por fonte",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "content": "📅 CRONOGRAMA DE DESENVOLVIMENTO",
+        "children": [
+          {
+            "content": "<strong>Fase 1: Planejamento e Estruturação (4 semanas)</strong>",
+            "children": [
+              {
+                "content": "Semana 1-2: Definição final de escopo e arquitetura",
+                "children": []
+              },
+              {
+                "content": "Semana 3-4: Design de UX/UI e prototipagem",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Fase 2: Desenvolvimento Técnico (8 semanas)</strong>",
+            "children": [
+              {
+                "content": "Semana 5-6: Desenvolvimento de backend e API",
+                "children": []
+              },
+              {
+                "content": "Semana 7-8: Implementação de frontend e responsividade",
+                "children": []
+              },
+              {
+                "content": "Semana 9-10: Integração com sistemas e otimização",
+                "children": []
+              },
+              {
+                "content": "Semana 11-12: Testes e ajustes de performance",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Fase 3: Conteúdo e Otimização (6 semanas)</strong>",
+            "children": [
+              {
+                "content": "Semana 13-14: Produção de conteúdo base",
+                "children": []
+              },
+              {
+                "content": "Semana 15-16: Implementação de schema markup e SEO IA-Ready",
+                "children": []
+              },
+              {
+                "content": "Semana 17-18: Revisão final e ajustes de conteúdo",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Fase 4: Lançamento e Promoção (contínuo)</strong>",
+            "children": [
+              {
+                "content": "Semana 19: Lançamento oficial",
+                "children": []
+              },
+              {
+                "content": "Semana 20-24: Campanha de lançamento e monitoramento",
+                "children": []
+              },
+              {
+                "content": "Mês 3+: Análise de resultados e otimizações",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong> Marcos Críticos</strong>",
+            "children": [
+              {
+                "content": "Semana 4: Aprovação do design e protótipo",
+                "children": []
+              },
+              {
+                "content": "Semana 8: Versão funcional para testes",
+                "children": []
+              },
+              {
+                "content": "Semana 12: Versão final para revisão",
+                "children": []
+              },
+              {
+                "content": "Semana 19: Lançamento oficial",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "content": "⚠️ RISCOS TÉCNICOS E MITIGAÇÃO",
+        "children": [
+          {
+            "content": "<strong>Riscos Principais</strong>",
+            "children": [
+              {
+                "content": "<strong>Complexidade de Integração</strong>",
+                "children": [
+                  {
+                    "content": "Descrição: Dificuldades na integração com sistemas legados",
+                    "children": []
+                  },
+                  {
+                    "content": "Impacto: Alto - pode atrasar desenvolvimento e funcionalidades",
+                    "children": []
+                  },
+                  {
+                    "content": "Mitigação:",
+                    "children": [
+                      {
+                        "content": "Desenvolver conectores específicos para sistemas mais comuns",
+                        "children": []
+                      },
+                      {
+                        "content": "Implementar API robusta com documentação clara",
+                        "children": []
+                      },
+                      {
+                        "content": "Realizar testes de integração antecipados",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "content": "<strong>Performance em Conteúdo Rico</strong>",
+                "children": [
+                  {
+                    "content": "Descrição: Lentidão no carregamento de páginas com muitos dados",
+                    "children": []
+                  },
+                  {
+                    "content": "Impacto: Médio - afeta experiência do usuário e SEO",
+                    "children": []
+                  },
+                  {
+                    "content": "Mitigação:",
+                    "children": [
+                      {
+                        "content": "Implementar lazy loading para elementos pesados",
+                        "children": []
+                      },
+                      {
+                        "content": "Otimizar imagens e recursos estáticos",
+                        "children": []
+                      },
+                      {
+                        "content": "Utilizar CDN para distribuição global",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "content": "<strong>Adoção de Schema Markup</strong>",
+                "children": [
+                  {
+                    "content": "Descrição: Implementação incorreta ou incompleta de dados estruturados",
+                    "children": []
+                  },
+                  {
+                    "content": "Impacto: Alto - compromete estratégia de SEO IA-Ready",
+                    "children": []
+                  },
+                  {
+                    "content": "Mitigação:",
+                    "children": [
+                      {
+                        "content": "Utilizar ferramentas de validação (Google Structured Data Testing)",
+                        "children": []
+                      },
+                      {
+                        "content": "Consultoria especializada em schema markup",
+                        "children": []
+                      },
+                      {
+                        "content": "Testes contínuos em diferentes IAs",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "content": "<strong>Segurança de Dados</strong>",
+                "children": [
+                  {
+                    "content": "Descrição: Vulnerabilidades que podem expor dados sensíveis",
+                    "children": []
+                  },
+                  {
+                    "content": "Impacto: Crítico - danos à reputação e legais",
+                    "children": []
+                  },
+                  {
+                    "content": "Mitigação:",
+                    "children": [
+                      {
+                        "content": "Implementar HTTPS em todo o site",
+                        "children": []
+                      },
+                      {
+                        "content": "Realizar testes de penetração regulares",
+                        "children": []
+                      },
+                      {
+                        "content": "Seguir práticas OWASP para desenvolvimento seguro",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "content": "<strong>Plano de Contingência</strong>",
+            "children": [
+              {
+                "content": "<strong>Equipe de Resposta Rápida</strong>: Designar equipe técnica para resposta imediata a incidentes",
+                "children": []
+              },
+              {
+                "content": "<strong>Monitoramento Contínuo</strong>: Implementar ferramentas de monitoramento de performance e segurança",
+                "children": []
+              },
+              {
+                "content": "<strong>Backup e Recuperação</strong>: Rotinas diárias de backup com testes de recuperação",
+                "children": []
+              },
+              {
+                "content": "<strong>Comunicação de Crise</strong>: Protocolo para comunicação transparente em caso de problemas",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "content": "📈 MÉTRICAS ESTRATÉGICAS DE SUCESSO",
+        "children": [
+          {
+            "content": "<strong>Métricas de Autoridade</strong>",
+            "children": [
+              {
+                "content": "Volume de citações em IAs",
+                "children": []
+              },
+              {
+                "content": "Posicionamento em respostas técnicas",
+                "children": []
+              },
+              {
+                "content": "Reconhecimento como fonte confiável",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Métricas de Negócio</strong>",
+            "children": [
+              {
+                "content": "Qualidade dos leads (taxa de conversão >3%)",
+                "children": []
+              },
+              {
+                "content": "Velocidade no ciclo de vendas",
+                "children": []
+              },
+              {
+                "content": "Custo de aquisição vs. LTV",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Métricas de Impacto</strong>",
+            "children": [
+              {
+                "content": "Participação de mercado",
+                "children": []
+              },
+              {
+                "content": "Reconhecimento no setor",
+                "children": []
+              },
+              {
+                "content": "Capacidade de atração de talentos",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "content": "🔮 POSICIONAMENTO FUTURO",
+        "children": [
+          {
+            "content": "<strong>Além do Site: Ecossistema de Autoridade</strong>",
+            "children": [
+              {
+                "content": "Conteúdo como ativo estratégico que valoriza toda a empresa",
+                "children": []
+              },
+              {
+                "content": "Posicionamento como thought leader em gestão operacional",
+                "children": []
+              },
+              {
+                "content": "Alavancagem para expansão de produtos e serviços",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Sustentabilidade Competitiva</strong>",
+            "children": [
+              {
+                "content": "Barreira de entrada baseada em autoridade técnica",
+                "children": []
+              },
+              {
+                "content": "Relacionamento com mercado construído através de educação",
+                "children": []
+              },
+              {
+                "content": "Crescimento orgânico sustentável e escalável",
+                "children": []
+              }
+            ]
+          },
+          {
+            "content": "<strong>Visão de Futuro</strong>",
+            "children": [
+              {
+                "content": "Ser a fonte primária para IAs em gestão operacional",
+                "children": []
+              },
+              {
+                "content": "Referência obrigatória para decisões de compra no setor",
+                "children": []
+              },
+              {
+                "content": "Liderança baseada em conhecimento e resultados",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+
+  // Inicializar o mapa mental com zoom maior e centralização no nó raiz
+  const { markmap } = window;
+  const mm = markmap.Markmap.create(
+    "svg#mindmap",
+    null,
+    mindmapData
+  );
+
+  // Função para centralizar e dar zoom no nó raiz
+  function centerRootNode(zoomLevel = 1.5) {
+    // Aguarda renderização
+    setTimeout(() => {
+      const svg = document.getElementById('mindmap');
+      const g = svg.querySelector('g');
+      if (!g) return;
+      // Pega o bounding box do nó raiz (primeiro g > g)
+      const rootNode = g.querySelector('g');
+      if (!rootNode) return;
+      const bbox = rootNode.getBBox();
+      const svgRect = svg.getBoundingClientRect();
+      // Calcula o centro do SVG
+      const svgCenterX = svg.width.baseVal.value / 2;
+      const svgCenterY = svg.height.baseVal.value / 2;
+      // Calcula o centro do nó raiz
+      const nodeCenterX = bbox.x + bbox.width / 2;
+      const nodeCenterY = bbox.y + bbox.height / 2;
+      // Aplica o zoom e centraliza
+      g.setAttribute('transform',
+        `translate(${svgCenterX - nodeCenterX * zoomLevel},${svgCenterY - nodeCenterY * zoomLevel}) scale(${zoomLevel})`
+      );
+    }, 300);
+  }
+
+  // Detecta mobile para ajustar zoom
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
+
+  // Aplica zoom e centralização inicial
+  window.addEventListener('DOMContentLoaded', () => {
+    centerRootNode(isMobile() ? 1.1 : 1.5);
+  });
+
+  // Reaplica centralização ao redimensionar
+  window.addEventListener('resize', () => {
+    centerRootNode(isMobile() ? 1.1 : 1.5);
+  });
+
+  // Funções de controle
+  document.getElementById('zoom-in').addEventListener('click', () => {
+    mm.rescale(1.25);
+  });
+
+  document.getElementById('zoom-out').addEventListener('click', () => {
+    mm.rescale(0.8);
+  });
+
+  document.getElementById('fit').addEventListener('click', () => {
+    mm.fit();
+  });
+
+  document.getElementById('fullscreen').addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

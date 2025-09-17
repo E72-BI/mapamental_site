@@ -1,0 +1,113 @@
+/* styles.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #333;
+}
+body {
+  background-color: #f8f9fa;
+  overflow: hidden;
+}
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  z-index: 1000;
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+.logo {
+  height: 48px;
+  margin-right: 0;
+  object-fit: contain;
+}
+.brand-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a365d;
+}
+.slogan {
+  font-size: 14px;
+  color: #4a5568;
+  margin-top: 3px;
+}
+#mindmap {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 60px;
+}
+.markmap {
+  font-family: inherit;
+}
+.markmap-node {
+  cursor: pointer;
+}
+.markmap-node circle {
+  fill: #1a365d;
+}
+.markmap-node text {
+  font-weight: 500;
+}
+/* Controles de zoom */
+.controls {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 1001;
+}
+.control-btn {
+  background-color: #1a365d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+.control-btn:hover {
+  background-color: #2c5282;
+  transform: scale(1.05);
+}
+/* Responsividade */
+@media (max-width: 768px) {
+  .header {
+    height: 50px;
+    padding: 0 15px;
+  }
+  .logo {
+    height: 32px;
+    margin-right: 0;
+  }
+  .controls {
+    bottom: 15px;
+    right: 15px;
+  }
+  .control-btn {
+    width: 36px;
+    height: 36px;
+  }
+  #mindmap {
+    padding-top: 50px;
+  }
+}
